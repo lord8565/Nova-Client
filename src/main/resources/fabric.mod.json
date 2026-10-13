@@ -5,6 +5,7 @@
   "name": "Nova Client",
   "description": "Test client for anticheat / anti-xray testing on your own server.",
   "environment": "client",
+  "mixins": ["nova.mixins.json"],
   "entrypoints": { "client": ["nova.NovaClient"] },
   "depends": {
     "fabricloader": ">=0.16.0",

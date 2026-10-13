@@ -4,7 +4,7 @@ Fabric, Minecraft 1.21.11. Open the GUI with **Right Shift**.
 
 ## Build
 1. https://fabricmc.net/develop -> 1.21.11, copy exact versions into `gradle.properties`.
-2. JDK 21, `gradle build` (needs Gradle 9.x; or `./gradlew build` if you have the wrapper). After building, check the jar is not empty: `unzip -l build/libs/nova-client-2.9.0.jar` must list `fabric.mod.json` and `nova/*.class`. Jar: `build/libs/nova-client-2.9.0.jar` (not `-sources`). Put it in `mods/` with Fabric API.
+2. JDK 21, `gradle build` (needs Gradle 9.x; or `./gradlew build` if you have the wrapper). After building, check the jar is not empty: `unzip -l build/libs/nova-client-2.10.0.jar` must list `fabric.mod.json` and `nova/*.class`. Jar: `build/libs/nova-client-2.10.0.jar` (not `-sources`). Put it in `mods/` with Fabric API.
 
 ## GUI
 Icon tabs on the left, module cards in two columns. Left click = toggle, right click = fold out settings,
@@ -28,6 +28,15 @@ It turns smoothly to each face (Aim speed / Max turn), only clicks when the cros
   - *Settings*: all Schematic settings in foldable groups (Placement, Position, Restock, Walking & filler, Fixing, Display). Anything not in a group lands under "Other", so nothing is hidden.
   - A status pill in the header shows NO FILE / NO ORIGIN / READY / BUILDING / DONE, and the footer tells you the next step. "< Modules" goes back to the normal menu.
 - Builder logic is unchanged apart from a small speed tracker (blocks finished per minute) and read-only accessors for the window.
+
+## Changes in 2.10.0
+- **12 more modules.**
+  - *Misc*: **AutoReconnect** (rejoins the last server after a delay, max tries), **AutoRelog** (disconnects and rejoins below a Y level), **StaffList** (finds staff by rank words in the tab list, HUD panel + join alert).
+  - *World*: **SpawnerProtect** (cancels mining a spawner; survival only), **SpawnerNotifier**.
+  - *Render*: **BlockESP** (spawners, vaults, beacons, command blocks, ... with tracers), **SpawnerNametags**, **Freecam** (WASD / Space / Shift, Ctrl = faster), **Freelook**, **Xray** (ore / chest list), **SlowSwing**.
+  - *HUD*: **RegionMap** (loaded chunks around you with the 32x32 region borders and the r.X.Z file name).
+- **Mixins (new).** Freecam, Freelook, Xray and SlowSwing hook the camera, mouse look, block face culling and swing duration (`src/main/java/nova/mixin`, `nova.mixins.json`). The config is marked `required: false` with `defaultRequire: 0`, so if a hook does not match this Minecraft version the game still starts and only that feature does nothing (check `logs/latest.log` for "nova.mixins.json"). ESP / tracers / nametags hide themselves while Freecam or Freelook is on. Xray does not work with Sodium-style renderers.
+- Source only: written without the game libraries, run `./gradlew build` and check the log. New names to look at if it fails: `ConnectScreen.connect(screen, client, address, info, quickPlay, cookieStorage)`, `PlayerListEntry.getDisplayName`, `BlockPos.asLong`, `WorldRenderer.reload`, `ClientPlayerInteractionManager.cancelBlockBreaking`, and in the mixins `Camera.setPos/setRotation/update`, `Entity.changeLookDirection`, `Block.shouldDrawSide`, `LivingEntity.getHandSwingDuration`.
 
 ## Changes in 2.9.0
 - **26 new modules** (the Anubis idea list, written fresh in Nova's own style; Schematic builder and menu are untouched). All of them appear in their tab automatically, with settings, keybinds and config saving like every other module.

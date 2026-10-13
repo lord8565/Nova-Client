@@ -10,6 +10,7 @@ import nova.core.Config;
 import nova.core.ModuleManager;
 import nova.gui.SplashScreen;
 import nova.modules.ClientModules;
+import nova.modules.ExtraMore;
 
 public class NovaClient implements ClientModInitializer {
     private static boolean splashShown;
@@ -20,6 +21,7 @@ public class NovaClient implements ClientModInitializer {
         Config.load();
         ClientTickEvents.END_CLIENT_TICK.register(c -> {
             ModuleManager.tick();
+            try { ExtraMore.offlineTick(c); } catch (Throwable t) { t.printStackTrace(); }
             showSplash(c);
         });
         HudRenderCallback.EVENT.register((ctx, tc) -> ModuleManager.hud(ctx));

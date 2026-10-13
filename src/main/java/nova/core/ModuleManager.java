@@ -46,15 +46,19 @@ public final class ModuleManager {
             new RenderModules.NameTags(), new RenderModules.DropESP(),
             new ExtraRender.Trajectories(), new ExtraRender.PearlTrajectory(), new ExtraRender.TargetESP(),
             new ExtraRender.BlockOverlay(), new ExtraRender.JumpCircles(), new ExtraRender.HitParticles(),
-            new ExtraRender.LowHealthWarning(), new ExtraRender.Zoom());
+            new ExtraRender.LowHealthWarning(), new ExtraRender.Zoom(),
+            new ExtraMore.BlockESP(), new ExtraMore.SpawnerNametags(), new ExtraMore.Freecam(), new ExtraMore.Freelook(),
+            new ExtraMore.Xray(), new ExtraMore.SlowSwing());
         add(new BuildModules.Schematic(), new WorldModules.Nuker(), new WorldModules.OreScan(),
-            new WorldModules.StashFinder(), new WorldModules.BaseFinder(), new WorldModules.SpawnerFinder());
+            new WorldModules.StashFinder(), new WorldModules.BaseFinder(), new WorldModules.SpawnerFinder(),
+            new ExtraMore.SpawnerProtect(), new ExtraMore.SpawnerNotifier());
         add(new MiscModules.AutoRespawn(), new MiscModules.AutoLog(), new MiscModules.AntiAFK(), new MiscModules.PearlThrow(),
             new ExtraMisc.PlayerDetection(), new ExtraMisc.WeatherNotifier(), new ExtraMisc.CoordSnapper(),
-            new ExtraMisc.RenderDistanceToggle());
+            new ExtraMisc.RenderDistanceToggle(),
+            new ExtraMore.AutoReconnect(), new ExtraMore.AutoRelog(), new ExtraMore.StaffList());
         add(new HudModules.Watermark(), new HudModules.ModuleList(), new HudModules.Coordinates(),
             new HudModules.ArmorHud(), new HudModules.PlayerRadar(), new HudModules.PotionHud(),
-            new HudModules.SpeedHud(), new HudModules.PingHud());
+            new HudModules.SpeedHud(), new HudModules.PingHud(), new ExtraMore.RegionMap());
         add(new ClientModules.Theme(), new ClientModules.Layout(), new ClientModules.Background(), new ClientModules.Gui(), new ClientModules.Notify());
         for (Mod m : MODULES) if (m.category == Category.CLIENT) m.enabled = true;
     }

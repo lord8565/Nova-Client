@@ -71,7 +71,7 @@ public final class Proj {
     public static Proj begin() {
         var p = mc.player;
         if (p == null || eyeCur == null || mc.options.hudHidden) return null;
-        if (!mc.options.getPerspective().isFirstPerson()) return null;
+        if (!mc.options.getPerspective().isFirstPerson() || CamState.active()) return null;
         float fr = frac();
         Vec3d eye = eyePrev.lerp(eyeCur, fr);
         double yaw = Math.toRadians(p.getYaw()), pitch = Math.toRadians(p.getPitch());
